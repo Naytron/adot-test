@@ -52,7 +52,9 @@ jobs:
 
       - name: Create Release
         if: steps.tag.outputs.created == 'true'
-        uses: softprops/action-gh-release@v2
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ steps.package.outputs.version }}
-          generate_release_notes: true
+          release_name: v${{ steps.package.outputs.version }}
